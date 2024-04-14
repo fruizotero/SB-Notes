@@ -1,20 +1,21 @@
 package com.fruizotero.springjpahibernate.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
-@Data
+//@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class UserDto {
 
     private int id;
     private String email;
     private String password;
-    private Set<RoleDto> roles;
+    private List<RoleDto> roles;
+    private Set<Integer> rolesIds;
 }
