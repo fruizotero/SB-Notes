@@ -4,6 +4,7 @@ import com.fruizotero.springjpahibernate.domain.entities.RoleEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface RoleService {
 
@@ -19,4 +20,5 @@ public interface RoleService {
 
     Optional<RoleEntity> updateRole(RoleEntity role, int id);
 
+    List<RoleEntity> getRoleEntities(Set<Integer> rolesIds);
 }

@@ -1,5 +1,6 @@
 package com.fruizotero.springjpahibernate.services.impl;
 
+import com.fruizotero.springjpahibernate.domain.dto.UserDto;
 import com.fruizotero.springjpahibernate.domain.entities.RoleEntity;
 import com.fruizotero.springjpahibernate.repositories.RoleRepository;
 import com.fruizotero.springjpahibernate.services.RoleService;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -53,5 +56,16 @@ public class RoleServiceImpl implements RoleService {
             Optional.ofNullable(roleEntity.getName()).ifPresent(role::setName);
             return roleRepository.save(role);
         });
+    }
+
+    public List<RoleEntity> getRoleEntities(Set<Integer> rolesIds) {
+        List<RoleEntity> roles =
+                rolesIds.stream().
+                        map(this::getRole)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .toList();
+
+        return roles;
     }
 }
