@@ -1,12 +1,11 @@
 package com.fruizotero.springjpahibernate.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+//@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -24,9 +23,9 @@ public class NoteEntity {
     @Column(length = 1500)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity userId;
 
 
 }
