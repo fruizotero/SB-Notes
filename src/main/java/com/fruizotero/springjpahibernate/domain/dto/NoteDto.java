@@ -14,5 +14,5 @@ public class NoteDto {
     private int id;
     private String title;
     private String content;
-    private int user_id;
+    private Integer userId;
 }
