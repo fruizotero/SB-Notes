@@ -1,4 +1,4 @@
-# Aprendiendo Apring Boot
+# Aprendiendo Spring Boot
 
 ## Configuración Inicial
 
