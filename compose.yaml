@@ -1,10 +1,26 @@
+version: '3.8'  # Especifica la versión de Docker Compose
+
 services:
-  db:
-    container_name: db_jpa_spring
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "root"
+  app:  # Servicio de aplicación Spring Boot
+    build: .  # Construye la imagen a partir del Dockerfile en el directorio actual
     ports:
-      - "8000:3306"
+      - "8080:8080"  # Mapea el puerto 8080 del contenedor al puerto 8080 del host
+    environment:
+      #- SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/jpa_notas?createDatabaseIfNotExist=true
+      - DB_URL=jdbc:mysql://dbmysql:3306/jpa_notas?createDatabaseIfNotExist=true
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - SPRING_PROFILES_ACTIVE=prod  # Establece el perfil activo de Spring
+    #restart: on-failure  # Política de reinicio del contenedor
+    depends_on:
+      - dbmysql  # Dependencia del servicio de base de datos
+
+  dbmysql:  # Servicio de base de datos MySQL
+    #container_name: db_jpa_spring  # Nombre del contenedor de MySQL
+    image: mysql  # Usa la imagen oficial de MySQL
+    command: --default-authentication-plugin=mysql_native_password  # Comando para configurar la autenticación
+    restart: always  # Siempre reinicia el servicio en caso de fallo
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"  # Contraseña del usuario root
+    ports:
+      - "3306:3306"  # Mapea el puerto 3306 del contenedor al puerto 8000 del host
