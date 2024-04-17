@@ -68,7 +68,8 @@ public class UserController {
         UserEntity userToCreate = userMapper.mapFrom(userDto);
 
         //TODO::refactorizar
-        List<RoleEntity> roles = roleService.getRoleEntities(userDto.getRolesIds());
+        List<RoleEntity> roles = roleService.getRoleEntities(userDto.getRoles());
+//        List<RoleEntity> roles = roleService.getRoleEntities(userDto.getRolesIds());
 
         userToCreate.setRoles(roles);
 

@@ -86,9 +86,11 @@ public class UserServiceImpl implements UserService {
                 user.setPassword(userToUpdateDto.getPassword());
 //            Optional.ofNullable(userUpdate.getPassword()).ifPresent(user::setPassword);
 
-            if (Optional.ofNullable(userToUpdateDto.getRolesIds()).isPresent()) {
+//            if (Optional.ofNullable(userToUpdateDto.getRolesIds()).isPresent()) {
+            if (Optional.ofNullable(userToUpdateDto.getRoles()).isPresent()) {
                 user.getRoles().clear();
-                List<RoleEntity> roleEntities = roleService.getRoleEntities(userToUpdateDto.getRolesIds());
+                List<RoleEntity> roleEntities = roleService.getRoleEntities(userToUpdateDto.getRoles());
+//                List<RoleEntity> roleEntities = roleService.getRoleEntities(userToUpdateDto.getRolesIds());
                 user.getRoles().addAll(roleEntities);
             }
             return userRepository.save(user);

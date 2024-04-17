@@ -19,7 +19,8 @@ public class UserDto {
     private String email;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-    private List<RoleDto> roles;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Set<Integer> rolesIds;
+    private List<Integer> roles;
+//    private List<RoleDto> roles;
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private Set<Integer> rolesIds;
 }
