@@ -18,7 +18,7 @@ public interface UserService {
 
     Optional<UserEntity> getUser(int id);
 
-    Optional<UserEntity> saveUser(UserEntity user);
+    Optional<UserEntity> saveUser(UserDto userDto);
 
     Optional<UserEntity> updateUser(UserDto user);
 

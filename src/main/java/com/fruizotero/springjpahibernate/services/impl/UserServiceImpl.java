@@ -3,12 +3,17 @@ package com.fruizotero.springjpahibernate.services.impl;
 import com.fruizotero.springjpahibernate.domain.dto.UserDto;
 import com.fruizotero.springjpahibernate.domain.entities.RoleEntity;
 import com.fruizotero.springjpahibernate.domain.entities.UserEntity;
+import com.fruizotero.springjpahibernate.exceptions.NotFoundException;
+import com.fruizotero.springjpahibernate.exceptions.NotValidDataException;
+import com.fruizotero.springjpahibernate.mappers.Mapper;
 import com.fruizotero.springjpahibernate.repositories.UserRepository;
 import com.fruizotero.springjpahibernate.services.RoleService;
 import com.fruizotero.springjpahibernate.services.UserService;
+import com.fruizotero.springjpahibernate.utils.ResponseMessages;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,15 +22,19 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleService roleService;
+    private Mapper<UserEntity, UserDto> userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, RoleService roleService) {
+    public UserServiceImpl(UserRepository userRepository, RoleService roleService, Mapper<UserEntity, UserDto> userMapper) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.userMapper = userMapper;
     }
 
 
     @Override
     public void deleteUser(int id) {
+
+        validateUserId(id);
 
         userRepository.deleteById(id);
 
@@ -49,52 +58,82 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserEntity> getUser(int id) {
 
-        if (!userRepository.existsById(id))
-            return Optional.empty();
+        validateUserId(id);
 
         return userRepository.findById(id);
 
     }
 
     @Override
-    public Optional<UserEntity> saveUser(UserEntity user) {
+    @Transactional
+    public Optional<UserEntity> saveUser(UserDto userDto) {
 
-        return Optional.of(userRepository.save(user));
+        if (userRepository.existsByEmail(userDto.getEmail()))
+            throw new NotValidDataException(
+                    ResponseMessages.INVALID_EMAIL.getMessage(),
+                    new HashMap<>() {{
+                        put("email", userDto.getEmail());
+                    }});
+
+        validateRoles(userDto);
+
+        UserEntity userToCreate = userMapper.mapFrom(userDto);
+        List<RoleEntity> roles = roleService.getRoleEntities(userDto.getRoles());
+        userToCreate.setRoles(roles);
+
+
+        return Optional.of(userRepository.save(userToCreate));
     }
 
     @Override
     @Transactional
-    public Optional<UserEntity> updateUser(UserDto userToUpdateDto) throws RuntimeException {
-        //
-        if (!userRepository.existsById(userToUpdateDto.getId()))
-            throw new RuntimeException("user not found");
+    public Optional<UserEntity> updateUser(UserDto userToUpdateDto) {
+
+        validateUserId(userToUpdateDto.getId());
 
         Optional<UserEntity> userToUpdateEntity = getUser(userToUpdateDto.getId());
 
         if (!userToUpdateEntity.get().getEmail().equalsIgnoreCase(userToUpdateDto.getEmail()) && existsEmail(userToUpdateDto.getEmail()))
-           throw new RuntimeException("Invalid email");
+            throw new NotValidDataException(ResponseMessages.INVALID_EMAIL.getMessage(), new HashMap<>() {{
+                put("email", userToUpdateDto.getEmail());
+            }});
 
-
+        validateRoles(userToUpdateDto);
 
         return userToUpdateEntity.map(user -> {
 
             if (Optional.ofNullable(userToUpdateDto.getEmail()).isPresent())
                 user.setEmail(userToUpdateDto.getEmail());
-//            Optional.ofNullable(userUpdate.getEmail()).ifPresent(user::setEmail);
+
             //TODO:: Tenemos que hashear la contraseña
             if (Optional.ofNullable(userToUpdateDto.getPassword()).isPresent())
                 user.setPassword(userToUpdateDto.getPassword());
-//            Optional.ofNullable(userUpdate.getPassword()).ifPresent(user::setPassword);
 
-//            if (Optional.ofNullable(userToUpdateDto.getRolesIds()).isPresent()) {
             if (Optional.ofNullable(userToUpdateDto.getRoles()).isPresent()) {
                 user.getRoles().clear();
                 List<RoleEntity> roleEntities = roleService.getRoleEntities(userToUpdateDto.getRoles());
-//                List<RoleEntity> roleEntities = roleService.getRoleEntities(userToUpdateDto.getRolesIds());
+
                 user.getRoles().addAll(roleEntities);
             }
             return userRepository.save(user);
 
         });
+    }
+
+    private void validateUserId(int userToUpdateDto) {
+        if (!userRepository.existsById(userToUpdateDto))
+            throw new NotFoundException(ResponseMessages.NOT_FOUND_USER.getMessage());
+    }
+
+    private void validateRoles(UserDto userToUpdateDto) {
+        userToUpdateDto.getRoles()
+                .forEach(rolId -> {
+                    if (!roleService.existsRole(rolId))
+                        throw new NotValidDataException(
+                                ResponseMessages.INVALID_ROL.getMessage(),
+                                new HashMap<>() {{
+                                    put("roles", userToUpdateDto.getRoles().toString());
+                                }});
+                });
     }
 }
