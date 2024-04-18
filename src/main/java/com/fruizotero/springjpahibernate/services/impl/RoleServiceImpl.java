@@ -1,9 +1,14 @@
 package com.fruizotero.springjpahibernate.services.impl;
 
+import com.fruizotero.springjpahibernate.domain.dto.RoleDto;
 import com.fruizotero.springjpahibernate.domain.entities.RoleEntity;
+import com.fruizotero.springjpahibernate.exceptions.NotFoundException;
+import com.fruizotero.springjpahibernate.mappers.Mapper;
 import com.fruizotero.springjpahibernate.repositories.RoleRepository;
 import com.fruizotero.springjpahibernate.services.RoleService;
+import com.fruizotero.springjpahibernate.utils.ResponseMessages;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +17,19 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
+    private Mapper<RoleEntity, RoleDto> roleMapper;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, Mapper<RoleEntity, RoleDto> roleMapper) {
         this.roleRepository = roleRepository;
+        this.roleMapper = roleMapper;
     }
 
     @Override
     public void deleteRole(int id) {
+
+        if (!roleRepository.existsById(id))
+            throw new NotFoundException(ResponseMessages.NOT_FOUND_ROLE.getMessage());
+
         roleRepository.deleteById(id);
     }
 
@@ -33,24 +44,30 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Optional<RoleEntity> getRole(int id) {
+    public Optional<RoleEntity> getRole(int id) throws RuntimeException {
+
+        if (!roleRepository.existsById(id))
+            throw new NotFoundException(ResponseMessages.NOT_FOUND_ROLE.getMessage());
+
         return roleRepository.findById(id);
     }
 
     @Override
-    public Optional<RoleEntity> saveRole(RoleEntity role) {
+    public Optional<RoleEntity> saveRole(RoleDto roleDto) {
 
-        return Optional.of(roleRepository.save(role));
+        return Optional.of(roleRepository.save(roleMapper.mapFrom(roleDto)));
     }
 
     @Override
-    public Optional<RoleEntity> updateRole(RoleEntity roleEntity, int id) {
+    public Optional<RoleEntity> updateRole(RoleDto roleDto) {
 
-//        roleEntity.setId(id);
-        Optional<RoleEntity> roleExisting = getRole(id);
+        if (!roleRepository.existsById(roleDto.getId()))
+            throw new NotFoundException(ResponseMessages.NOT_FOUND_ROLE.getMessage());
+
+        Optional<RoleEntity> roleExisting = getRole(roleDto.getId());
 
         return roleExisting.map(role -> {
-            Optional.ofNullable(roleEntity.getName()).ifPresent(role::setName);
+            Optional.ofNullable(roleDto.getName()).ifPresent(role::setName);
             return roleRepository.save(role);
         });
     }

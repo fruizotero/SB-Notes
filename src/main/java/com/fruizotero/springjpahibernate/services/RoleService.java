@@ -1,5 +1,6 @@
 package com.fruizotero.springjpahibernate.services;
 
+import com.fruizotero.springjpahibernate.domain.dto.RoleDto;
 import com.fruizotero.springjpahibernate.domain.entities.RoleEntity;
 
 import java.util.List;
@@ -15,9 +16,9 @@ public interface RoleService {
 
     Optional<RoleEntity> getRole(int id);
 
-    Optional<RoleEntity> saveRole(RoleEntity role);
+    Optional<RoleEntity> saveRole(RoleDto roleDto);
 
-    Optional<RoleEntity> updateRole(RoleEntity role, int id);
+    Optional<RoleEntity> updateRole(RoleDto roleDto);
 
     List<RoleEntity> getRoleEntities(List<Integer> rolesIds);
 }
