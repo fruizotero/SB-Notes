@@ -20,14 +20,20 @@ Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarr
 
 - Asegúrate de tener Docker instalado.
 - En la carpeta del proyecto, ejecuta `docker compose up`. El proyecto iniciará en http://localhost:8080.
-- Para iniciar los servicios desde cero en cada ejecución, ejecuta ` docker compose build --no-cache
-  ` y luego `docker compose up`.
+- Para iniciar los servicios desde cero en cada ejecución, ejecuta `docker compose build --no-cache` y luego `docker compose up`.
 - Para eliminar los contenedores ejecuta `docker compose down`
+- **Errores al iniciar Docker**: Algunas veces, debido a que el servicio del que depende otro tarda en empezar, pueden ocurrir errores. Puede ser necesario ejecutar unas cuantas veces `docker compose up`.
+- **Errores en Windows durante el `docker compose up`**:
+  - Si encuentras errores como `/bin/sh: 1: ./mvnw: not found`, puede deberse a que Windows no trata `./mvnw` como un archivo binario. Para solucionarlo, se añadió el archivo `.gitattributes`. Más información [aquí](https://stackoverflow.com/q/72455739/24313181).
+  - Si te encuentras con el error `"/usr/bin/env: ‘bash\r’: No such file or directory"`, se debe a los saltos de línea entre Linux y Windows. Solución: clonar el repositorio con la configuración adecuada: `git clone https://github.com/fruizotero/SB-Notes.git  --config core.autocrlf=input` Más información [aquí](https://github.com/tiangolo/uwsgi-nginx-flask-docker/issues/127#issuecomment-688418738).
 
 ## Documentación de la API
 
-- Puedes encontrar la documentación de los endpoints para probar la API en: http://localhost:8080/docs
-
+- Puedes encontrar la documentación de los endpoints para probar la API : https://notes.fruizotero.info/docs
+- Si se quiere probar la aplicación ya desplegada simplemente reemplazar `http://localhost:8080` por `https://notes.fruizotero.info`
+- **Endpoints para importarlos a `insomnia` o `postman`** 
+  - [Endpoints localhost](./src/main/resources/static/Insomnia_2024-04-19_local.json) 
+  - [Endpoints notes.fruizotero.info](./src/main/resources/static/Insomnia_2024-04-19_dominio.json)
 
 ## Problemas Comunes
 
@@ -77,4 +83,3 @@ Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarr
 - **Inyección de dependencias**, manejo de relaciones ORM, uso de JPA/Hibernate, y manejo de errores con `@ControllerAdvice`.
 - Importancia de la separación de capas y centralización del manejo de errores.
 - Uso efectivo de DTOs y las ventajas de depender de interfaces para futuros cambios.
-

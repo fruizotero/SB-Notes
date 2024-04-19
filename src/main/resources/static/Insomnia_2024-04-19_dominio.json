@@ -1,0 +1,524 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-04-19T20:51:23.770Z",
+  "__export_source": "insomnia.desktop.app:v8.6.1",
+  "resources": [
+    {
+      "_id": "req_0093f8de4ede4ebc82de4ed4779caeb0",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559818936,
+      "created": 1713257918211,
+      "url": "https://notes.fruizotero.info/notes/22",
+      "name": "notes/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": null,\n\t\"message\": \"La nota se elimino con éxito\",\n\t\"errors\": null\n}\n```\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"Nota no encontrada\",\n\t\"errors\": null\n}\n```",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713257918211,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_176d533349584e72b5f112148514ce2a",
+      "parentId": null,
+      "modified": 1713559513672,
+      "created": 1713559513672,
+      "name": "endpoints_dominio",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_bed97ccdd1dd4a75843cefbd4f877c7d",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559802486,
+      "created": 1713256379202,
+      "url": "https://notes.fruizotero.info/notes/22",
+      "name": "notes/{id}",
+      "description": "\n```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 2,\n\t\t\"title\": \"test create - update\",\n\t\t\"content\": \"Content test create\",\n\t\t\"userId\": 1\n\t},\n\t\"message\": \"La nota se actualizó con éxito\",\n\t\"errors\": null\n}\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\n\t\t\"title\": \"test create - update\",\n\t\t\"content\": \"Content test create\",\n\t\t\"user_id\":1\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713256379203,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6a1d14f4aec84a0781603dacf7c850a6",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559776968,
+      "created": 1713217987898,
+      "url": "https://notes.fruizotero.info/notes",
+      "name": "notes",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 21,\n\t\t\"title\": \"test create\",\n\t\t\"content\": \"Content test create\",\n\t\t\"userId\": 5\n\t},\n\t\"message\": \"La nota se creo con éxito\",\n\t\"errors\": null\n}\n```\n\n```response:409\n{\n\t\"success\": false,\n\t\"data\": {\n\t\t\"user_id\": \"9\"\n\t},\n\t\"message\": \"El user_id no es válido\",\n\t\"errors\": null\n}\n```",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"title\": \"test create\",\n\t\t\"content\": \"Content test create\",\n\t\t\"userId\": 5\n}\n\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713217987898,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2087bea76eb54162ab3e46d22be1a49d",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559753278,
+      "created": 1713210310803,
+      "url": "https://notes.fruizotero.info/notes/5",
+      "name": "notes/{id}",
+      "description": "Notas de usuario. Devuelve todas las notas con el id de usuario asociado.\n\n\n```response:200\n{\n\t\"success\": true,\n\t\"data\": [\n\t\t{\n\t\t\t\"id\": 13,\n\t\t\t\"title\": \"Note 13\",\n\t\t\t\"content\": \"Content of Note 13\",\n\t\t\t\"userId\": 4\n\t\t},\n\t\t{\n\t\t\t\"id\": 14,\n\t\t\t\"title\": \"Note 14\",\n\t\t\t\"content\": \"Content of Note 14\",\n\t\t\t\"userId\": 4\n\t\t},\n\t\t{\n\t\t\t\"id\": 15,\n\t\t\t\"title\": \"Note 15\",\n\t\t\t\"content\": \"Content of Note 15\",\n\t\t\t\"userId\": 4\n\t\t},\n\t\t{\n\t\t\t\"id\": 16,\n\t\t\t\"title\": \"Note 16\",\n\t\t\t\"content\": \"Content of Note 16\",\n\t\t\t\"userId\": 4\n\t\t}\n\t],\n\t\"message\": \"Las notas del usuario se solicitaron con éxito\",\n\t\"errors\": null\n}\n```\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"Usuario no encontrado\",\n\t\"errors\": null\n}\n```\n",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713210310803,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1eff9bcb97f849d58eef3b88620dd12e",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559742400,
+      "created": 1713210282547,
+      "url": "https://notes.fruizotero.info/notes",
+      "name": "notes",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"title\": \"Note 1\",\n\t\t\t\"content\": \"Content of Note 1\",\n\t\t\t\"userId\": 1\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"title\": \"Note 2\",\n\t\t\t\"content\": \"Content of Note 2\",\n\t\t\t\"userId\": 1\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"title\": \"Note 3\",\n\t\t\t\"content\": \"Content of Note 3\",\n\t\t\t\"userId\": 1\n\t\t},\n\t\t{\n\t\t\t\"id\": 4,\n\t\t\t\"title\": \"Note 4\",\n\t\t\t\"content\": \"Content of Note 4\",\n\t\t\t\"userId\": 1\n\t\t}\n\t],\n\t\"message\": \"Las notas se solicitaron con éxito\",\n\t\"errors\": null\n}\n```\n",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713210282547,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_03c95e4624f14cfbbd341ec9b01551aa",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559731643,
+      "created": 1713096470395,
+      "url": "https://notes.fruizotero.info/users/6",
+      "name": "users/{id}",
+      "description": "```response:200\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"El usuario se elimino con éxito\",\n\t\"errors\": null\n}\n```\n```response:400\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"Cannot delete or update a parent row: a foreign key constraint fails (`jpa_notas`.`notes`, CONSTRAINT `FKechaouoa6kus6k1dpix1u91c` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))\",\n\t\"errors\": null\n}\n```\n\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"Usuario no encontrado\",\n\t\"errors\": null\n}\n```\n",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713096470395,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_05867d6499a34a79b0f8a79123aa2927",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559708829,
+      "created": 1713038170784,
+      "url": "https://notes.fruizotero.info/users/6",
+      "name": "users/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 6,\n\t\t\"email\": \"user55@example.com\",\n\t\t\"roles\": [\n\t\t\t1\n\t\t]\n\t},\n\t\"message\": \"El usuario se actualizó con éxto\",\n\t\"errors\": null\n}\n```\n\n```response:409\n{\n\t\"success\": false,\n\t\"data\": {\n\t\t\"email\": \"user1@example.com\"\n\t},\n\t\"message\": \"Email no válido\",\n\t\"errors\": null\n}\n```\n\n```response:409\n{\n\t\"success\": false,\n\t\"data\": {\n\t\t\"roles\": \"[3]\"\n\t},\n\t\"message\": \"Rol no válido\",\n\t\"errors\": null\n}\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\n\"email\":\"user1_1@example.com\",\n\"roles\":[2]\t\n\n}\n\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713038170784,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c0e28d6eaae944419532b49747c3ee5d",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559683268,
+      "created": 1713013867593,
+      "url": "https://notes.fruizotero.info/users",
+      "name": "users",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 6,\n\t\t\"email\": \"usuario_test@gmail.com\",\n\t\t\"roles\": [\n\t\t\t2\n\t\t]\n\t},\n\t\"message\": \"El usuario se creó con éxito\",\n\t\"errors\": null\n}\n```\n\n```response:409\n{\n\t\"success\": false,\n\t\"data\": {\n\t\t\"email\": \"usuario_test@gmail.com\"\n\t},\n\t\"message\": \"Email no válido\",\n\t\"errors\": null\n}\n```\n\n```response:409\n{\n\t\"success\": false,\n\t\"data\": {\n\t\t\"roles\": \"[2, 10]\"\n\t},\n\t\"message\": \"Rol no válido\",\n\t\"errors\": null\n}\n```",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"usuario_test_1@gmail.com\",\n\t\"password\": \"123456\",\n\t\"roles\":[2]\n\t\n}\n\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713013867593,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eadd94531cde4277ac1a7b41bd077abc",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559669755,
+      "created": 1713013748753,
+      "url": "https://notes.fruizotero.info/users/5",
+      "name": "users/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 1,\n\t\t\"email\": \"user1@example.com\",\n\t\t\"roles\": [\n\t\t\t1\n\t\t]\n\t},\n\t\"message\": \"El usuario no existe\",\n\t\"errors\": null\n}\n```\n\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"Usuario no encontrado\",\n\t\"errors\": null\n}\n```",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713013748753,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_63f9aa8a07664c82815080a72e4b3d76",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559658501,
+      "created": 1713012916806,
+      "url": "https://notes.fruizotero.info/users",
+      "name": "users",
+      "description": "\n```response:200\n{\n\t\"success\": true,\n\t\"data\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"email\": \"user1@example.com\",\n\t\t\t\"roles\": [\n\t\t\t\t1\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"email\": \"user2@example.com\",\n\t\t\t\"roles\": [\n\t\t\t\t1\n\t\t\t]\n\t\t}\n\t],\n\t\"message\": \"Los usuarios se solicitaron con éxito\",\n\t\"errors\": null\n}\n```\n",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1713012916806,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d7ee427aa9b44ab082a3ce40b552a20e",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559647186,
+      "created": 1712999727534,
+      "url": "https://notes.fruizotero.info/roles/3",
+      "name": "roles/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": null,\n\t\"message\": \"El rol se eliminó correctamente\",\n\t\"errors\": null\n}\n```\n\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"El rol no existe\",\n\t\"errors\": null\n}\n```",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1712999727534,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ee1291df00ab439ea25d6bf23c8b339d",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559633552,
+      "created": 1712999644344,
+      "url": "https://notes.fruizotero.info/roles/3",
+      "name": "roles/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 3,\n\t\t\"name\": \"tes api update\"\n\t},\n\t\"message\": \"El rol se actualizó correctament\",\n\t\"errors\": null\n}\n```\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"El rol no existe\",\n\t\"errors\": null\n}\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\":\"tes api update\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1712999644344,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4e803fb40c0a43da90c5ff4a113ee777",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559623285,
+      "created": 1712999560997,
+      "url": "https://notes.fruizotero.info/roles",
+      "name": "roles",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 3,\n\t\t\"name\": \"test api\"\n\t},\n\t\"message\": \"El rol se creó e manera éxitosa\",\n\t\"errors\": null\n}\n```",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"test api\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1712999560997,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d30f4c6bef9341b0934c0e64fff00c3e",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559604793,
+      "created": 1712999506844,
+      "url": "https://notes.fruizotero.info/roles/2",
+      "name": "roles/{id}",
+      "description": "```response:200\n{\n\t\"success\": true,\n\t\"data\": {\n\t\t\"id\": 2,\n\t\t\"name\": \"admin\"\n\t},\n\t\"message\": \"El rol se solicitó con éxito\",\n\t\"errors\": null\n}\n```\n\n```response:404\n{\n\t\"success\": false,\n\t\"data\": null,\n\t\"message\": \"El rol no existe\",\n\t\"errors\": null\n}\n```\n",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1712999506844,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6673b804ea884d8d95b1849e09856adb",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559586842,
+      "created": 1712774531337,
+      "url": "https://notes.fruizotero.info/roles",
+      "name": "roles",
+      "description": "\n```response:200\n{\n\t\"success\": true,\n\t\"data\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"user\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"admin\"\n\t\t}\n\t],\n\t\"message\": \"Los roles se solicitaron de manera éxitosa\",\n\t\"errors\": null\n}\n```\n",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/8.6.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1712774531338,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_e64ff0a9d5a42a20b04f00d5ba804a263c2f74cd",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559513677,
+      "created": 1713559513677,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1713559513677,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_e64ff0a9d5a42a20b04f00d5ba804a263c2f74cd",
+      "parentId": "wrk_176d533349584e72b5f112148514ce2a",
+      "modified": 1713559513680,
+      "created": 1713559513680,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0 20px;
+}
+
+h1, h2, h3, h4 {
+    color: #333;
+}
+
+code {
+    background-color: #f7f7f7;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #b52e31;
+}
+
+/* Estilos para mobiles y tablets */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+}
+
+/* Estilos para desktop */
+@media (min-width: 769px) {
+    body {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    h4 {
+        font-size: 16px;
+    }
+}

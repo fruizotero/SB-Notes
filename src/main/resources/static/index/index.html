@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1 id="aprendiendo-spring-boot">Aprendiendo Spring Boot</h1>
+    <h2 id="descripci-n-general">Descripción General</h2>
+    <p>
+      Este proyecto utiliza Spring Framework para demostrar varios conceptos de
+      desarrollo de aplicaciones con Java. A lo largo de este documento,
+      encontrarás información útil sobre cómo configurar y solucionar problemas
+      comunes, así como enlaces a recursos externos y videos que complementan la
+      explicación.
+    </p>
+    <h2 id="configuraci-n-inicial">Configuración Inicial</h2>
+    <h3 id="properties">Properties</h3>
+    <ul>
+      <li>
+        <strong>Application Properties</strong>: Asegúrate de tener bien
+        configurada la sección de <code>application.properties</code>.
+        <ul>
+          <li>
+            Presta atención a la codificación de caracteres para evitar
+            problemas con acentos. Una guía detallada para configurar UTF-8 en
+            IntelliJ IDEA puede encontrarse
+            <a
+              href="https://blog.jetbrains.com/idea/2013/03/use-the-utf-8-luke-file-encodings-in-intellij-idea/"
+              >aquí</a
+            >.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="docker">Docker</h3>
+    <ul>
+      <li>
+        <strong>Comunicación entre contenedores</strong>: Si experimentas
+        errores al comunicar los contenedores de Docker, asegúrate de revisar el
+        <code>data.source.url</code> en <code>application.properties</code>.
+        <ul>
+          <li>
+            Utiliza la variable de entorno <code>SPRING_DATASOURCE_URL</code> en
+            <code>compose.yaml</code> para solucionar este problema. Más
+            detalles
+            <a href="https://stackoverflow.com/a/66170886/24313181">aquí</a>.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h4 id="iniciar-la-aplicaci-n-con-docker">
+      Iniciar la aplicación con Docker
+    </h4>
+    <ul>
+      <li>Asegúrate de tener Docker instalado.</li>
+      <li>
+        En la carpeta del proyecto, ejecuta <code>docker compose up</code>. El
+        proyecto iniciará en
+        <a href="http://localhost:8080">http://localhost:8080</a>.
+      </li>
+      <li>
+        Para iniciar los servicios desde cero en cada ejecución, ejecuta
+        <code>docker compose build --no-cache</code> y luego
+        <code>docker compose up</code>.
+      </li>
+      <li>
+        Para eliminar los contenedores ejecuta <code>docker compose down</code>
+      </li>
+      <li>
+        <strong>Errores al iniciar Docker</strong>: Algunas veces, debido a que
+        el servicio del que depende otro tarda en empezar, pueden ocurrir
+        errores. Puede ser necesario ejecutar unas cuantas veces
+        <code>docker compose up</code>.
+      </li>
+      <li>
+        <strong
+          >Errores en Windows durante el <code>docker compose up</code></strong
+        >:
+        <ul>
+          <li>
+            Si encuentras errores como
+            <code>/bin/sh: 1: ./mvnw: not found</code>, puede deberse a que
+            Windows no trata <code>./mvnw</code> como un archivo binario. Para
+            solucionarlo, se añadió el archivo <code>.gitattributes</code>. Más
+            información
+            <a href="https://stackoverflow.com/q/72455739/24313181">aquí</a>.
+          </li>
+          <li>
+            Si te encuentras con el error
+            <code
+              >&quot;/usr/bin/env: ‘bash\r’: No such file or
+              directory&quot;</code
+            >, se debe a los saltos de línea entre Linux y Windows. Solución:
+            clonar el repositorio con la configuración adecuada:
+            <code
+              >git clone https://github.com/fruizotero/SB-Notes.git --config
+              core.autocrlf=input</code
+            >
+            Más información
+            <a
+              href="https://github.com/tiangolo/uwsgi-nginx-flask-docker/issues/127#issuecomment-688418738"
+              >aquí</a
+            >.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="documentaci-n-de-la-api">Documentación de la API</h2>
+    <ul>
+      <li>
+        Puedes encontrar la documentación de los endpoints para probar la API :
+        <a href="https://notes.fruizotero.info/docs"
+          >https://notes.fruizotero.info/docs</a
+        >
+      </li>
+      <li>
+        Si se quiere probar la aplicación ya desplegada simplemente reemplazar
+        <code>http://localhost:8080</code> por
+        <code>https://notes.fruizotero.info</code>
+      </li>
+      <li>
+        <strong
+          >Endpoints para importarlos a <code>insomnia</code> o
+          <code>postman</code></strong
+        >
+        <ul>
+          <li>
+            <a href="./src/main/resources/static/Insomnia_2024-04-19_local.json"
+              >Endpoints localhost</a
+            >
+          </li>
+          <li>
+            <a
+              href="./src/main/resources/static/Insomnia_2024-04-19_dominio.json"
+              >Endpoints notes.fruizotero.info</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="problemas-comunes">Problemas Comunes</h2>
+    <h3 id="errores-de-entidades-y-relaciones">
+      Errores de Entidades y Relaciones
+    </h3>
+    <ul>
+      <li>
+        <strong>@Data de Lombok</strong>: Puede causar problemas inesperados,
+        más información
+        <a href="https://stackoverflow.com/a/68605588/24313181">aquí</a>.
+      </li>
+      <li>
+        <strong>Problemas con Sets en relaciones ManyToMany</strong>: Asegúrate
+        de que la información se devuelve correctamente desde la tabla asociada.
+        Una solución puede encontrarse
+        <a href="https://stackoverflow.com/a/77421861">aquí</a>.
+      </li>
+      <li>
+        <strong>Encadenar Optionals con método map</strong>: Usar map dentro de
+        otro map puede llevar a problemas.
+      </li>
+      <li>
+        <strong>Actualización de relaciones ManyToMany</strong>: Al actualizar,
+        usa &quot;clear&quot; seguido de &quot;addAll&quot; para manejar
+        correctamente las listas en el lado inverso de la relación.
+      </li>
+    </ul>
+    <h3 id="errores-de-consultas-y-mapeos">Errores de Consultas y Mapeos</h3>
+    <ul>
+      <li>
+        <strong>Consulta y Mapeo Entidad-DTO</strong>: Asegúrate de que los
+        nombres de los campos en las consultas coincidan con los nombres de las
+        propiedades de la entidad. Más detalles pueden encontrarse
+        <a
+          href="https://chat.openai.com/share/cb7d8861-531c-4a75-9677-661632bfc8c5"
+          >aquí</a
+        >.
+      </li>
+    </ul>
+    <h2 id="herramientas-y-librer-as">Herramientas y Librerías</h2>
+    <ul>
+      <li>
+        <p><strong>Librerías utilizadas</strong>:</p>
+        <ul>
+          <li>
+            ModelMapper:
+            <a href="https://modelmapper.org/getting-started/">Documentación</a>
+          </li>
+          <li>
+            Lombok:
+            <a href="https://projectlombok.org/features/">Características</a>
+          </li>
+          <li>
+            Insomnia Documenter:
+            <a href="https://github.com/insodoc/insomnia-documenter">GitHub</a>
+          </li>
+          <li>
+            wait-for-it:
+            <a href="https://github.com/vishnubob/wait-for-it">GitHub</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Herramientas</strong>:</p>
+        <ul>
+          <li>Insomnia</li>
+          <li>Docker</li>
+          <li>IntelliJ</li>
+          <li>ChatGPT</li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="recursos-adicionales">Recursos Adicionales</h2>
+    <ul>
+      <li>
+        <p>
+          <strong
+            >Documentación oficial de Spring y tutoriales relacionados</strong
+          >:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html#jpa.query-methods.at-query"
+              >Spring Data JPA</a
+            >
+          </li>
+          <li>
+            Baeldung sobre Spring:
+            <a
+              href="https://www.baeldung.com/spring-data-exists-query#using-a-derived-query-method"
+              >Exist queries</a
+            >,
+            <a href="https://www.baeldung.com/spring-response-entity"
+              >Response Entity</a
+            >, y más.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          <strong>Curso de YouTube</strong>: Visualiza el tutorial completo en
+          YouTube para un aprendizaje más interactivo.
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=Nv2DERaMx-4&amp;t=3075s"
+              >Ver Curso</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="mejoras-por-implementar">Mejoras por Implementar</h2>
+    <ul>
+      <li>Implementar autenticación.</li>
+      <li>Mejorar la paginación en ciertos endpoints.</li>
+      <li>
+        Reforzar las validaciones de campos antes de ser enviados al servicio.
+      </li>
+      <li>Implementar más pruebas.</li>
+    </ul>
+    <h2 id="aprendizajes-clave-del-proyecto">
+      Aprendizajes Clave del Proyecto
+    </h2>
+    <ul>
+      <li>
+        <strong>Inyección de dependencias</strong>, manejo de relaciones ORM,
+        uso de JPA/Hibernate, y manejo de errores con
+        <code>@ControllerAdvice</code>.
+      </li>
+      <li>
+        Importancia de la separación de capas y centralización del manejo de
+        errores.
+      </li>
+      <li>
+        Uso efectivo de DTOs y las ventajas de depender de interfaces para
+        futuros cambios.
+      </li>
+    </ul>
+  </body>
+</html>
