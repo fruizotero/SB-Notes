@@ -92,11 +92,11 @@ public class RoleController {
 
         roleService.deleteRole(id);
 
-        return new ResponseEntity<>(ApiResponse.<String>builder()
+        return ResponseEntity.ok(
+                ApiResponse.<String>builder()
                 .message(ResponseMessages.DELETE_ROLE.getMessage())
                 .success(true)
-                .build(),
-                HttpStatus.OK);
+                .build());
     }
 
 

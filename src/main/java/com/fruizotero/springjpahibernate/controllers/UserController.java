@@ -104,7 +104,7 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok(
                 ApiResponse.<String>builder()
-                        .success(false)
+                        .success(true)
                         .message(ResponseMessages.DELETE_USER.getMessage())
                         .build());
     }
