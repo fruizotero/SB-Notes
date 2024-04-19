@@ -1,53 +1,76 @@
 # Aprendiendo Spring Boot
 
+## Descripción General
+
+Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarrollo de aplicaciones con Java. A lo largo de este documento, encontrarás información útil sobre cómo configurar y solucionar problemas comunes, así como enlaces a recursos externos y videos que complementan la explicación.
+
 ## Configuración Inicial
 
-### Configuración de `application.properties`
+### Properties
 
-- Asegúrate de tener bien configurada la sección de `application.properties`.
-- **Error común**: Problemas con los acentos al compilar con Maven.
-    - Solución: Configura IntelliJ IDEA para usar la codificación UTF-8. [Lee más aquí](https://blog.jetbrains.com/idea/2013/03/use-the-utf-8-luke-file-encodings-in-intellij-idea/).
+- **Application Properties**: Asegúrate de tener bien configurada la sección de `application.properties`.
+  - Presta atención a la codificación de caracteres para evitar problemas con acentos. Una guía detallada para configurar UTF-8 en IntelliJ IDEA puede encontrarse [aquí](https://blog.jetbrains.com/idea/2013/03/use-the-utf-8-luke-file-encodings-in-intellij-idea/).
 
-### Base de Datos
+### Docker
 
-- **Error común**: Puedes encontrarte con errores si la base de datos no está creada.
+- **Comunicación entre contenedores**: Si experimentas errores al comunicar los contenedores de Docker, asegúrate de revisar el `data.source.url` en `application.properties`.
+  - Utiliza la variable de entorno `SPRING_DATASOURCE_URL` en `compose.yaml` para solucionar este problema. Más detalles [aquí](https://stackoverflow.com/a/66170886/24313181).
 
-## Problemas Comunes en Código
+#### Iniciar la aplicación con Docker
 
-### Uso de `@Data` de Lombok
+- Asegúrate de tener Docker instalado.
+- En la carpeta del proyecto, ejecuta `docker compose up`. El proyecto iniciará en http://localhost:8080.
 
-- El uso de la anotación `@Data` de Lombok puede causar problemas inesperados.
-    - Detalles y soluciones en [StackOverflow](https://stackoverflow.com/a/68605588/24313181).
+## Documentación de la API
 
-### Relaciones `@ManyToMany`
+- Puedes encontrar la documentación de los endpoints para probar la API en: http://localhost:8080/docs
 
-- Problemas con `Set` en entidades relacionadas `@ManyToMany` que no devuelven correctamente la información de la tabla asociada.
-    - Explicación y solución en [StackOverflow](https://stackoverflow.com/a/77421861).
 
-- Al actualizar relaciones `@ManyToMany`, como listas de roles en la entidad de usuarios, utiliza "clear" seguido de "addAll" para evitar excepciones de inmutabilidad.
+## Problemas Comunes
 
-### Uso de Optional y Map
+### Errores de Entidades y Relaciones
 
-- Encadenar un `Optional` con su método `map` dentro de otro `map` puede llevar a problemas.
+- **@Data de Lombok**: Puede causar problemas inesperados, más información [aquí](https://stackoverflow.com/a/68605588/24313181).
+- **Problemas con Sets en relaciones ManyToMany**: Asegúrate de que la información se devuelve correctamente desde la tabla asociada. Una solución puede encontrarse [aquí](https://stackoverflow.com/a/77421861).
+- **Encadenar Optionals con método map**: Usar map dentro de otro map puede llevar a problemas.
+- **Actualización de relaciones ManyToMany**: Al actualizar, usa "clear" seguido de "addAll" para manejar correctamente las listas en el lado inverso de la relación.
 
-### Consultas y Mapeo Entidad-DTO
+### Errores de Consultas y Mapeos
 
-- **Error común**: La propiedad consultada en el repositorio debe coincidir en nombre con la propiedad de la entidad.
-    - Ejemplo de consulta correcta: **findBy{propiedadEntidadRelacionada}{propiedadEntidadPrincipal}** "findByUserIdId" 
-    - Más sobre este problema en [OpenAI Chat](https://chat.openai.com/share/cb7d8861-531c-4a75-9677-661632bfc8c5).
+- **Consulta y Mapeo Entidad-DTO**: Asegúrate de que los nombres de los campos en las consultas coincidan con los nombres de las propiedades de la entidad. Más detalles pueden encontrarse [aquí](https://chat.openai.com/share/cb7d8861-531c-4a75-9677-661632bfc8c5).
+
+## Herramientas y Librerías
+
+- **Librerías utilizadas**:
+  - ModelMapper: [Documentación](https://modelmapper.org/getting-started/)
+  - Lombok: [Características](https://projectlombok.org/features/)
+  - Insomnia Documenter: [GitHub](https://github.com/insodoc/insomnia-documenter)
+
+- **Herramientas**:
+  - Insomnia
+  - Docker
+  - IntelliJ
+  - ChatGPT
 
 ## Recursos Adicionales
 
-### Cursos y Documentación
+- **Documentación oficial de Spring y tutoriales relacionados**:
+  - [Spring Data JPA](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html#jpa.query-methods.at-query)
+  - Baeldung sobre Spring: [Exist queries](https://www.baeldung.com/spring-data-exists-query#using-a-derived-query-method), [Response Entity](https://www.baeldung.com/spring-response-entity), y más.
 
-- **Curso de YouTube sobre Spring**
-    - [Ver curso](https://www.youtube.com/watch?v=Nv2DERaMx-4&t=3075s)
+- **Curso de YouTube**: Visualiza el tutorial completo en YouTube para un aprendizaje más interactivo.
+  - [Ver Curso](https://www.youtube.com/watch?v=Nv2DERaMx-4&t=3075s)
 
-- **Documentación de Spring Data JPA**
-    - [Métodos de consulta](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html#jpa.query-methods.at-query)
-    - [Consultas con `exists`](https://www.baeldung.com/spring-data-exists-query#using-a-derived-query-method)
-    - [Uso de ResponseEntity en Spring](https://www.baeldung.com/spring-response-entity)
-    - [Manejo de Request y Response Body en Spring](https://www.baeldung.com/spring-request-response-body)
-    - [Referencia de CrudRepository](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html)
-    - [Tipos de cascada en JPA](https://www.baeldung.com/jpa-cascade-types)
+## Mejoras por Implementar
+
+- Implementar autenticación.
+- Mejorar la paginación en ciertos endpoints.
+- Reforzar las validaciones de campos antes de ser enviados al servicio.
+- Implementar más pruebas.
+
+## Aprendizajes Clave del Proyecto
+
+- **Inyección de dependencias**, manejo de relaciones ORM, uso de JPA/Hibernate, y manejo de errores con `@ControllerAdvice`.
+- Importancia de la separación de capas y centralización del manejo de errores.
+- Uso efectivo de DTOs y las ventajas de depender de interfaces para futuros cambios.
 
