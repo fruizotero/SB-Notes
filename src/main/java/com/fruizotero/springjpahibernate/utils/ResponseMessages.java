@@ -21,6 +21,15 @@ public enum ResponseMessages {
     INVALID_EMAIL("Email no válido"),
     INVALID_ROL("Rol no válido"),
     NOT_FOUND_USER("Usuario no encontrado"),
+    GET_NOTES("Las notas se solicitaron con éxito"),
+    GET_NOTES_USER("Las notas del usuario se solicitaron con éxito"),
+    CREATE_NOTE("La nota se creo con éxito"),
+    CREATE_NOTE_ERROR(""),
+    UPDATE_NOTE("La nota se actualizó con éxito"),
+    UPDATE_NOTE_ERROR(""),
+    DELETE_NOTE("La nota se elimino con éxito"),
+    NOT_FOUND_NOTE("Nota no encontrada"),
+    INVALID_USER_ID("El user_id no es válido"),
     ;
 
 
