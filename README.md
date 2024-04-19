@@ -20,6 +20,9 @@ Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarr
 
 - Asegúrate de tener Docker instalado.
 - En la carpeta del proyecto, ejecuta `docker compose up`. El proyecto iniciará en http://localhost:8080.
+- Para iniciar los servicios desde cero en cada ejecución, ejecuta ` docker compose build --no-cache
+  ` y luego `docker compose up`.
+- Para eliminar los contenedores ejecuta `docker compose down`
 
 ## Documentación de la API
 
@@ -45,6 +48,7 @@ Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarr
   - ModelMapper: [Documentación](https://modelmapper.org/getting-started/)
   - Lombok: [Características](https://projectlombok.org/features/)
   - Insomnia Documenter: [GitHub](https://github.com/insodoc/insomnia-documenter)
+  - wait-for-it: [GitHub](https://github.com/vishnubob/wait-for-it)
 
 - **Herramientas**:
   - Insomnia
