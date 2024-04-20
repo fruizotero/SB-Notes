@@ -2,7 +2,11 @@
 
 ## Descripción General
 
-Este proyecto utiliza Spring Framework para demostrar varios conceptos de desarrollo de aplicaciones con Java. A lo largo de este documento, encontrarás información útil sobre cómo configurar y solucionar problemas comunes, así como enlaces a recursos externos y videos que complementan la explicación.
+Este proyecto utiliza el Spring Framework para demostrar diversos conceptos en el desarrollo de aplicaciones con Java. A lo largo de este documento, encontrarás información útil sobre cómo configurar el entorno y solucionar problemas comunes. Además, se incluyen enlaces a recursos externos y videos que complementan las explicaciones.
+
+Este proyecto implementa una `API REST` para un `CRUD` básico sin autenticación. En la sección de documentación, podrás encontrar los endpoints disponibles.
+
+
 
 ## Configuración Inicial
 
