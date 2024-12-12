@@ -31,14 +31,6 @@ Este proyecto implementa una `API REST` para un `CRUD` básico sin autenticació
   - Si encuentras errores como `/bin/sh: 1: ./mvnw: not found`, puede deberse a que Windows no trata `./mvnw` como un archivo binario. Para solucionarlo, se añadió el archivo `.gitattributes`. Más información [aquí](https://stackoverflow.com/q/72455739/24313181).
   - Si te encuentras con el error `"/usr/bin/env: ‘bash\r’: No such file or directory"`, se debe a los saltos de línea entre Linux y Windows. Solución: clonar el repositorio con la configuración adecuada: `git clone https://github.com/fruizotero/SB-Notes.git  --config core.autocrlf=input` Más información [aquí](https://github.com/tiangolo/uwsgi-nginx-flask-docker/issues/127#issuecomment-688418738).
 
-## Documentación de la API
-
-- Puedes encontrar la documentación de los endpoints para probar la API : https://notes.fruizotero.info/docs
-- Si se quiere probar la aplicación ya desplegada simplemente reemplazar `http://localhost:8080` por `https://notes.fruizotero.info`
-- **Endpoints para importarlos a `insomnia` o `postman`** 
-  - [Endpoints localhost](./src/main/resources/static/Insomnia_2024-04-19_local.json) 
-  - [Endpoints notes.fruizotero.info](./src/main/resources/static/Insomnia_2024-04-19_dominio.json)
-
 ## Problemas Comunes
 
 ### Errores de Entidades y Relaciones
